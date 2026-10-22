@@ -25,7 +25,10 @@ jobs:
           cache: npm
 
       - run: npm install
+      # DEPLOY_TARGET=github-pages 时 vite.config.js 会将 base 设为 /ink_flow/，适配 Pages 子路径
       - run: npm run build
+        env:
+          DEPLOY_TARGET: github-pages
 
       - uses: actions/upload-pages-artifact@v3
         with:

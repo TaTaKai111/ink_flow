@@ -1,5 +1,14 @@
-import { createRouter, createWebHistory } from 'vue-router'
+import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import store from '@/store'
+
+/**
+ * 路由模式按部署环境自动切换：
+ * - 本地开发与 Vercel 部署在根路径（BASE_URL 为 '/'），使用 history 模式，URL 美观（如 /article）
+ * - GitHub Pages 部署在 /ink_flow/ 子路径（BASE_URL 不为 '/'），使用 hash 模式，避免刷新子页面 404
+ * import.meta.env.BASE_URL 即 vite.config.js 中的 base 值，无需额外维护变量
+ */
+const routerHistory =
+  import.meta.env.BASE_URL === '/' ? createWebHistory() : createWebHashHistory()
 
 /**
  * 路由配置：全部采用懒加载
@@ -60,7 +69,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: routerHistory,
   routes,
 })
 

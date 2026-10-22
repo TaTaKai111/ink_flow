@@ -1,0 +1,11 @@
+- generic [ref=f2e7]:
+  - generic [ref=f2e8]:
+    - heading "InkFlow CMS" [level=1] [ref=f2e14]
+    - paragraph [ref=f2e15]: 个人博客内容管理平台
+  - generic [ref=f2e16]:
+    - textbox "请输入用户名" [ref=f2e25]: admin
+    - generic [ref=f2e29]:
+      - textbox "请输入密码" [ref=f2e35]: "123456"
+      - generic [ref=f2e37] [cursor=pointer]
+    - button "登 录" [ref=f2e41] [cursor=pointer]
+  - paragraph [ref=f2e43]: 演示账号：admin / 123456（任意非空用户名密码也可登录）
