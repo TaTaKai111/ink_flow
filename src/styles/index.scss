@@ -1,0 +1,121 @@
+/* ========== InkFlow CMS 全局样式 ========== */
+
+/* ---------- Element Plus 主题变量覆盖（深蓝主题，主色 #1a73e8） ---------- */
+:root {
+  --el-color-primary: #1a73e8;
+  --el-color-primary-light-3: #4a9bf5;
+  --el-color-primary-light-5: #7ab5f8;
+  --el-color-primary-light-7: #a9cffb;
+  --el-color-primary-light-8: #c4ddfd;
+  --el-color-primary-light-9: #e8f2fe;
+  --el-color-primary-dark-2: #0d47a1;
+
+  --el-color-success: #52c41a;
+  --el-color-warning: #faad14;
+  --el-color-danger: #f5222d;
+  --el-color-error: #f5222d;
+  --el-color-info: #909399;
+
+  --el-border-radius-base: 8px;
+  --el-border-radius-small: 6px;
+  --el-font-size-base: 14px;
+
+  /* InkFlow 设计令牌 */
+  --ink-primary: #1a73e8;
+  --ink-primary-dark: #0d47a1;
+  --ink-primary-light: #4a9bf5;
+  --ink-bg: #f5f7fa;
+  --ink-card-bg: #ffffff;
+  --ink-text-main: #1f2d3d;
+  --ink-text-sub: #5e6d82;
+  --ink-text-light: #909399;
+  --ink-shadow: 0 2px 12px rgba(26, 43, 74, 0.08);
+  --ink-shadow-hover: 0 6px 20px rgba(26, 43, 74, 0.14);
+}
+
+/* ---------- 基础 reset ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'PingFang SC', 'Helvetica Neue', 'Noto Sans', 'Microsoft YaHei', sans-serif;
+  font-size: 14px;
+  color: var(--ink-text-main);
+  background-color: var(--ink-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- 通用卡片 ---------- */
+.ink-card {
+  background: var(--ink-card-bg);
+  border-radius: 10px;
+  box-shadow: var(--ink-shadow);
+  padding: 20px;
+  transition: box-shadow 0.25s ease, transform 0.25s ease;
+}
+
+.ink-card:hover {
+  box-shadow: var(--ink-shadow-hover);
+}
+
+/* ---------- 页面容器 ---------- */
+.page-container {
+  padding: 20px;
+}
+
+/* ---------- 路由切换动画 ---------- */
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: all 0.25s ease;
+}
+
+.fade-slide-enter-from {
+  opacity: 0;
+  transform: translateX(12px);
+}
+
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateX(-12px);
+}
+
+/* ---------- 滚动条美化 ---------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c0c9d6;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a3b0c2;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---------- 表格与表单微调 ---------- */
+.el-table {
+  border-radius: 8px;
+}
+
+.el-dialog {
+  border-radius: 12px;
+}
+
+.el-button {
+  border-radius: 6px;
+}
