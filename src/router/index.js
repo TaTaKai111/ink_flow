@@ -73,16 +73,21 @@ const router = createRouter({
   routes,
 })
 
-// 路由守卫：未登录跳转登录页，已登录访问登录页则跳首页
+/**
+ * 路由守卫：未登录一律跳转登录页，已登录访问登录页则回首页
+ * 登录态以 token + userInfo 同时有效为准，避免残留脏数据导致"跳过登录页"
+ */
 router.beforeEach((to, from, next) => {
-  const token = store.state.user.token
-  if (to.meta.public || to.path === '/login') {
-    if (token && to.path === '/login') {
-      return next('/')
-    }
+  const isLogin = store.getters['user/isLogin']
+
+  if (to.path === '/login') {
+    if (isLogin) return next('/')
     return next()
   }
-  if (!token) {
+  if (to.meta.public) {
+    return next()
+  }
+  if (!isLogin) {
     return next({ path: '/login', query: { redirect: to.fullPath } })
   }
   next()

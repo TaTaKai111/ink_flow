@@ -97,12 +97,24 @@
     </div>
     <noscript>请开启浏览器 JavaScript 功能后访问本站。</noscript>
     <script>
-      // 兜底提示：若 15 秒后应用仍未挂载（如网络异常），引导用户刷新
+      // 分阶段提示 + 硬兜底：任何情况下加载屏都不会永久停留
       window.__splashTimeout = setTimeout(function () {
+        var tip = document.querySelector('#app-splash .splash-tip')
+        if (tip) tip.textContent = '首次加载较慢，正在编译资源…'
+      }, 5000)
+
+      // 20 秒仍未挂载（脚本报错 / 资源加载失败）则强制移除，让用户看到真实页面与控制台
+      window.__splashForceHide = setTimeout(function () {
         var splash = document.getElementById('app-splash')
-        var tip = splash && splash.querySelector('.splash-tip')
-        if (tip) tip.textContent = '加载时间较长，请刷新页面重试'
-      }, 15000)
+        if (splash) splash.remove()
+        if (!document.getElementById('app').hasChildNodes()) {
+          var tip = document.createElement('p')
+          tip.style.cssText =
+            'position:fixed;inset:0;margin:0;display:flex;align-items:center;justify-content:center;color:#fff;font-size:14px;background:linear-gradient(135deg,#1a73e8,#0d47a1)'
+          tip.textContent = '资源加载失败，请按 F12 查看控制台并刷新页面重试'
+          document.body.appendChild(tip)
+        }
+      }, 20000)
     </script>
     <script type="module" src="/src/main.js"></script>
   </body>

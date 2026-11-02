@@ -4,7 +4,7 @@
 
 <script setup>
 import { computed } from 'vue'
-import * as echarts from 'echarts'
+import echarts from '@/utils/echarts'
 import VChart from '@/components/VChart.vue'
 
 const props = defineProps({

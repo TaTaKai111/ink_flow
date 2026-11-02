@@ -20,7 +20,7 @@
       active-text-color="#ffffff"
     >
       <el-menu-item v-for="item in menuRoutes" :key="item.path" :index="`/${item.path}`">
-        <el-icon><component :is="item.meta.icon" /></el-icon>
+        <el-icon><component :is="resolveIcon(item.meta.icon)" /></el-icon>
         <span class="menu-title">{{ item.meta.title }}</span>
       </el-menu-item>
     </el-menu>
@@ -33,8 +33,14 @@
 import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import Logo from './Logo.vue'
+import iconMap from '@/utils/icons'
 
 const route = useRoute()
+
+// 路由 meta.icon 为图标名字符串，映射为组件；缺失时回退到默认图标
+function resolveIcon(name) {
+  return iconMap[name] || iconMap.DataAnalysis
+}
 
 // 从路由表提取侧边栏菜单项（布局路由的一级子路由）
 const menuRoutes = computed(() => {

@@ -19,10 +19,29 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
+  // 预构建在「服务启动时」完成，而不是首次访问时才触发，
+  // 避免首屏请求被依赖预构建阻塞（表现为长时间卡在加载屏）
+  optimizeDeps: {
+    include: [
+      'vue',
+      'vue-router',
+      'vuex',
+      'axios',
+      'dayjs',
+      'mockjs',
+      'element-plus',
+      '@element-plus/icons-vue',
+      'echarts/core',
+      'echarts/charts',
+      'echarts/components',
+      'echarts/renderers',
+    ],
+  },
   server: {
     host: '0.0.0.0',
     port: 3000,
-    open: true,
+    // 用 127.0.0.1 打开，规避部分环境下 localhost 走 IPv6(::1) 或代理导致首屏请求挂起
+    open: 'http://127.0.0.1:3000/',
     allowedHosts: true,
   },
 })
